@@ -127,6 +127,8 @@ function setup() {
         return;
     }
 
+    setResolution();  // Set resolution initially to avoid blurry rendering
+
     const vertexShader = createShader(gl, gl.VERTEX_SHADER, vertexShaderSource);
     const fragmentShader = createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource);
     const program = createProgram(gl, vertexShader, fragmentShader);
@@ -302,10 +304,13 @@ function draw(time, uniformLocations) {
 }
 
 function setResolution(scale = 1) {
-    canvas.width = window.innerWidth * scale;
-    canvas.height = window.innerHeight * scale;
-    canvas.style.width = `${window.innerWidth}px`;
-    canvas.style.height = `${window.innerHeight}px`;
+    const dpi = window.devicePixelRatio || 1;
+    const width = window.innerWidth * scale;
+    const height = window.innerHeight * scale;
+    canvas.width = width * dpi;
+    canvas.height = height * dpi;
+    canvas.style.width = `${width}px`;
+    canvas.style.height = `${height}px`;
     gl.viewport(0, 0, canvas.width, canvas.height);
 }
 
@@ -317,7 +322,7 @@ function showMessage(message, type = 'info') {
     setTimeout(() => messageElement.remove(), 3000);
 }
 
-window.onload = setup;
+document.addEventListener('DOMContentLoaded', setup);
 
 
 

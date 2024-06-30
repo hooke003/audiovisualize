@@ -46,6 +46,21 @@ body, html {
     width: 100%;
 }
 
+/* Added media query for mobile responsiveness */
+@media (max-width: 600px) {
+    .controls {
+        padding: 10px;
+        grid-template-columns: 1fr; /* Stack controls vertically */
+    }
+    .control {
+        margin-bottom: 10px;
+    }
+    button, .file-input-label {
+        padding: 8px 10px; /* Smaller padding */
+        font-size: 12px; /* Smaller font size */
+    }
+}
+
 .control {
     display: flex;
     flex-direction: column;
