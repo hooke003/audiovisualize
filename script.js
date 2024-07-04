@@ -229,6 +229,12 @@ function setupEventListeners() {
             e.preventDefault();
             togglePlayPause();
             toggleControls();
+        } else if (e.code === 'Equal' || e.code === 'NumpadAdd') {
+            // Zoom in
+            targetSettings.zoom *= 1.1;
+        } else if (e.code === 'Minus' || e.code === 'NumpadSubtract') {
+            // Zoom out
+            targetSettings.zoom /= 1.1;
         }
     });
 
@@ -276,6 +282,8 @@ function smoothTransition() {
             settings[key] += (targetSettings[key] - settings[key]) * transitionSpeed;
         }
     }
+    // Ensure zoom doesn't go below a minimum value
+    settings.zoom = Math.max(settings.zoom, 0.1);
 }
 
 function draw(time, uniformLocations) {
